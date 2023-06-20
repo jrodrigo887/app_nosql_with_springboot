@@ -1,0 +1,21 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin123
+      - MONGO_DB_NAME=appmongodb
+    volumes:
+      - VOLMONGO:/data/db
+    ports:
+      - 27017:27017
+volumes:
+  VOLMONGO:
+    external: true
+
+networks:
+  APPMONGO:
+
+# docker run -it --network APPMONGO --name mongodb -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=mongodb -e MONGO_INITDB_ROOT_PASSWORD=admin123 -v VOLMONGO mongo
