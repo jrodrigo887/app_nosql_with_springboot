@@ -8,14 +8,17 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=admin123
       - MONGO_DB_NAME=appmongodb
     volumes:
-      - VOLMONGO:/data/db
+      - mongo-data:/data/db
     ports:
       - 27017:27017
+    networks:
+      - app-network
 volumes:
-  VOLMONGO:
+  mongo-data:
     external: true
 
 networks:
-  APPMONGO:
+  app-network:
 
 # docker run -it --network APPMONGO --name mongodb -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=mongodb -e MONGO_INITDB_ROOT_PASSWORD=admin123 -v VOLMONGO mongo
+# mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
