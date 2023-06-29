@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mongodb.api.app_nosql.domain.User;
+import com.mongodb.api.app_nosql.dtos.UserDTO;
 import com.mongodb.api.app_nosql.services.UserService;
 
 @RestController
@@ -20,9 +21,9 @@ public class UserResource {
     private UserService service;
     
     @GetMapping
-    public ResponseEntity<List<User>> index() {
+    public ResponseEntity<List<UserDTO>> index() {
         List<User> users = service.findAll();
-         
-        return ResponseEntity.ok(users);
+        List<UserDTO> listDto = users.stream().map(x -> new UserDTO(x)).toList();
+        return ResponseEntity.ok(listDto);
     }
 }
