@@ -21,7 +21,6 @@ public class UserResource {
     
     @GetMapping
     public ResponseEntity<List<User>> index() {
-        System.out.println("Entrou no controller");
         List<User> users = service.findAll();
          
         return ResponseEntity.ok(users);
