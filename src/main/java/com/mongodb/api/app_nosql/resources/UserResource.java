@@ -1,28 +1,29 @@
 package com.mongodb.api.app_nosql.resources;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mongodb.api.app_nosql.domain.User;
+import com.mongodb.api.app_nosql.services.UserService;
 
 @RestController
 @RequestMapping(value = "/users")
 public class UserResource {
+    
+    @Autowired
+    private UserService service;
+    
     @GetMapping
     public ResponseEntity<List<User>> index() {
-        List<User> users = new ArrayList<>();
-            
-        var us1 = new User("1", "João", "joao@email.com");
-        var us2 = new User("2", "Silva", "joao@email.com");
-        var us3 = new User("3", "Filipe", "joao@email.com");
-        users.addAll(Arrays.asList(us1, us2, us3));
-
+        System.out.println("Entrou no controller");
+        List<User> users = service.findAll();
+         
         return ResponseEntity.ok(users);
     }
 }
