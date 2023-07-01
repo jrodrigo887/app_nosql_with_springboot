@@ -24,8 +24,10 @@ public class UserService {
         if (user == null) {
             throw new ObjectNotFoundError("Não foi possível encontrar o usuário com id: "+id);
         }
-
         return user.get();
     }
 
+    public void insertUser(User user) {
+        repo.insert(user);
+    }
 }
