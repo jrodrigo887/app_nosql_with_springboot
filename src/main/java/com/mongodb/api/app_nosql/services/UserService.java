@@ -3,6 +3,7 @@ package com.mongodb.api.app_nosql.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +35,15 @@ public class UserService {
     public void delete(String id) {
         findById(id);
         repo.deleteById(id);
+    }
+
+    public User update(User user) {
+        User entitUser = findById(user.getId());
+        return repo.save(updateData(entitUser, user));
+    }
+
+    private User updateData(User entiUser, User obj) {
+            BeanUtils.copyProperties(obj, entiUser);
+            return entiUser;
     }
 }
