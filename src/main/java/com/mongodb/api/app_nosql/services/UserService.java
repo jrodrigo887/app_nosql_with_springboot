@@ -27,7 +27,12 @@ public class UserService {
         return user.get();
     }
 
-    public void insertUser(User user) {
-        repo.insert(user);
+    public User insertUser(User user) {
+        return repo.insert(user);
+    }
+
+    public void delete(String id) {
+        findById(id);
+        repo.deleteById(id);
     }
 }
