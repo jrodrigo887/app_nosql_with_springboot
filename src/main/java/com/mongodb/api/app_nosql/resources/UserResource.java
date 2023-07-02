@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.mongodb.api.app_nosql.domain.Post;
 import com.mongodb.api.app_nosql.domain.User;
 import com.mongodb.api.app_nosql.dtos.UserDTO;
 import com.mongodb.api.app_nosql.services.UserService;
@@ -38,6 +39,12 @@ public class UserResource {
     public ResponseEntity<UserDTO> findById(@PathVariable String id) {
         User user = service.findById(id);
         return ResponseEntity.ok(UserMapper.toDto(user));
+    }
+
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPost(@PathVariable String id) {
+        User user = service.findById(id);
+        return ResponseEntity.ok(user.getPosts());
     }
     
     @PostMapping
