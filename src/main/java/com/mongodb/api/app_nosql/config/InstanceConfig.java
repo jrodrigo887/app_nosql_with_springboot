@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.mongodb.api.app_nosql.domain.Post;
 import com.mongodb.api.app_nosql.domain.User;
+import com.mongodb.api.app_nosql.dtos.AuthorDTO;
 import com.mongodb.api.app_nosql.repository.PostRepository;
 import com.mongodb.api.app_nosql.repository.UserRepository;
 
@@ -32,10 +33,12 @@ public class InstanceConfig implements CommandLineRunner {
         var us4 = new User(null, "Maria", "mariape@email.com");
         var us5 = new User(null, "Aline", "aline@email.com");
         var us6 = new User(null, "Lua", "lua@email.com");
-        Post post1 = new Post(null, "Correntes marítimas", "Para entender melhor...", us1);
-        Post post3 = new Post(null, "Dados quebrado", "Para entender melhor...", us1);
-
+        
         repository.saveAll(Arrays.asList(us1, us2, us3, us4, us5, us6));
+
+        Post post1 = new Post(null, "Correntes marítimas", "Para entender melhor...", new AuthorDTO(us1));
+        Post post3 = new Post(null, "Dados quebrado", "Para entender melhor...", new AuthorDTO(us1));
+
         postRepository.saveAll(Arrays.asList(post1, post3));
     }
     
