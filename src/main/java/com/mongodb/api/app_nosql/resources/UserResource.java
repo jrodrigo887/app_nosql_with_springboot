@@ -39,21 +39,17 @@ public class UserResource {
         User user = service.findById(id);
         return ResponseEntity.ok(UserMapper.toDto(user));
     }
-
+    
     @PostMapping
     public ResponseEntity<UserDTO> insert(@RequestBody UserDTO userDto) {
         User user = UserMapper.fromDTO(userDto);
-
         var result = service.insertUser(user);
-
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/"+result.getId())
                 .buildAndExpand(userDto.getId()).toUri();
-
         return ResponseEntity.created(uri).body(UserMapper.toDto(result));
     }
-
     @PutMapping(value = "/{id}")
     public ResponseEntity<UserDTO> update(@RequestBody UserDTO userDto, @PathVariable String id) {
         User user = UserMapper.fromDTO(userDto);
@@ -61,7 +57,6 @@ public class UserResource {
         service.update(user);
         return ResponseEntity.noContent().build();
     }
-
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<User> delete(@PathVariable String id) {
         service.delete(id);
