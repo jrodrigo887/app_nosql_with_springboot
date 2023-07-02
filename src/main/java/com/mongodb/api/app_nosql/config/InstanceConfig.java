@@ -40,6 +40,9 @@ public class InstanceConfig implements CommandLineRunner {
         Post post3 = new Post(null, "Dados quebrado", "Para entender melhor...", new AuthorDTO(us1));
 
         postRepository.saveAll(Arrays.asList(post1, post3));
+
+        us1.setPosts(Arrays.asList(post1, post3));
+        repository.save(us1);
     }
     
 }
