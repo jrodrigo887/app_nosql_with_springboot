@@ -1,6 +1,6 @@
 package com.mongodb.api.app_nosql.domain;
-
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class Post implements Serializable {
     private String body;
     private AuthorDTO author;
 
-    private List<CommentDTO> comments = new ArrayList<CommentDTO>();
+    private List<CommentDTO> comments = new ArrayList<>();
 
     public Post() {
     }
