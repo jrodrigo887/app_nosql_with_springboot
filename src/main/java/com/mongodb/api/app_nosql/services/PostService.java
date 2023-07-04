@@ -1,5 +1,6 @@
 package com.mongodb.api.app_nosql.services;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,9 @@ public class PostService {
             throw new ObjectNotFoundError("Não foi possível encontrar o usuário com id: "+id);
         }
         return post.get();
+    }
+     
+    public List<Post> findByTitle(String text) {
+        return repo.findByTitleContaining(text);
     }
 }
